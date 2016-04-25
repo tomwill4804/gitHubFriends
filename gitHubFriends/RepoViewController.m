@@ -24,6 +24,7 @@
 //  get the list of repos from github
 //
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     self.title = self.friend.userid;
@@ -34,8 +35,7 @@
     //  get data from github
     //
     githubData= [[GitHubData alloc] init];
-    githubData.delegate = self;
-    [githubData startRequest:self.friend.attributes[@"repos_url"]];
+    [githubData startRequest:self.friend.attributes[@"repos_url"] delegate:self];
 
 }
 

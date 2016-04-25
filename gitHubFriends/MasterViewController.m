@@ -45,8 +45,7 @@
     //  test code
     //
     githubData= [[GitHubData alloc] init];
-    githubData.delegate = self;
-    [githubData startRequest:@"users/tomwill4804"];
+    [githubData startRequest:@"users/tomwill4804" delegate:self];
 
     
 }
@@ -110,8 +109,7 @@
     UIAlertAction *okAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         githubData= [[GitHubData alloc] init];
-        githubData.delegate = self;
-        [githubData startRequest:ac.textFields[0].text];
+        [githubData startRequest:ac.textFields[0].text delegate:self];
         
     }];
     

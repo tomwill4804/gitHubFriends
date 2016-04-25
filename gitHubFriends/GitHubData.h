@@ -18,13 +18,13 @@
 
 @interface GitHubData : NSObject
 
-@property (weak, nonatomic) id<GitHubDataDelegate> delegate;
+@property (strong, nonatomic) id<GitHubDataDelegate> delegate;
 
 @property (copy, nonatomic)   NSString* reqText;
 @property (strong, nonatomic) NSMutableData* rawData;
 @property (strong, nonatomic) NSDictionary *dictionary;
 @property (strong, nonatomic) NSString *errorText;
 
--(void)startRequest:(NSString*) req;
+-(void)startRequest:(NSString*)req delegate:(id<GitHubDataDelegate>) delegate;
 
 @end

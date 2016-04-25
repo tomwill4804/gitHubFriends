@@ -19,9 +19,11 @@
 //
 //  build a url request and start the request
 //
--(void)startRequest:(NSString*) req {
+-(void)startRequest:(NSString*)req delegate:(id<GitHubDataDelegate>) delegate; {
     
     self.reqText = req;
+    self.delegate = delegate;
+    
     if (![req hasPrefix:@"https://"])
         self.reqText = [NSString stringWithFormat:@"https://api.github.com/%@", req];
     NSURL* url = [NSURL URLWithString:self.reqText];
