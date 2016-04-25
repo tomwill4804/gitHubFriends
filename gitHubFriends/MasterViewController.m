@@ -169,6 +169,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
     Friend* friend = friends[indexPath.row];
+    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     cell.textLabel.text = friend.userid;
     
     return cell;
@@ -193,5 +194,11 @@
         
     }
 }
+
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    
+    
+}
+
 
 @end
