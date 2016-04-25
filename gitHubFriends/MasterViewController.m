@@ -17,11 +17,17 @@
 @implementation MasterViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+    if (!self.objects) {
+        self.objects = [[NSMutableArray alloc] init];
+    }
+
     // Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(GoToNewItemViewController:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
@@ -56,6 +62,31 @@
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
+}
+
+-(IBAction)GoToNewItemViewController:(id)sender{
+    
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Add a Friend"
+                                                                message:@"Enter a valid github username"
+                                                         preferredStyle:UIAlertControllerStyleAlert];
+    
+    [ac addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"username";
+    }];
+    
+    UIAlertAction *okAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UITextField *textField = ac.textFields[0];
+        [_objects addObject:textField.text];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_objects.count-1 inSection:0];
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
+    
+    [ac addAction:okAlert];
+    
+    [self presentViewController:ac animated:YES completion:nil];
+    
+
+    
 }
 
 #pragma mark - Table View
