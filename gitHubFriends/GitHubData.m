@@ -49,6 +49,9 @@ didCompleteWithError:(nullable NSError *)error{
     
 }
 
+//
+//  collect raw data
+//
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
     didReceiveData:(NSData *)data{
     
@@ -61,6 +64,9 @@ didCompleteWithError:(nullable NSError *)error{
 }
 
 
+//
+//
+//
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler
 {
     completionHandler(NSURLSessionResponseAllow);

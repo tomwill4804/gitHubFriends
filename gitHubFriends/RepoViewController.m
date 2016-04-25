@@ -20,9 +20,13 @@
 
 @implementation RepoViewController
 
-
+//
+//  get the list of repos from github
+//
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = self.friend.userid;
     
     repos = [[NSArray alloc] init];
     
@@ -33,11 +37,11 @@
     githubData.delegate = self;
     [githubData startRequest:self.friend.attributes[@"repos_url"]];
 
-
 }
 
 //
-//  github request is done
+//  github request is done.
+//  check for error and save array of dictionaries address
 //
 -(void) gotGitHubData{
     
@@ -98,8 +102,6 @@
     return cell;
     
 }
-
-
 
 
 @end

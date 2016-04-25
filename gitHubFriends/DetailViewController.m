@@ -19,6 +19,9 @@
 
 - (void)viewDidLoad {
     
+    self.title = self.friend.userid;
+    
+    
 }
 
 

@@ -26,6 +26,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.title = @"GitHub Friends";
     
     if (!friends) {
         friends = [[NSMutableArray alloc] init];
