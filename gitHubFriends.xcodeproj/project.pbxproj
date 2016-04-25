@@ -16,6 +16,7 @@
 		E31529A71CCE56A6005D092F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E31529A51CCE56A6005D092F /* LaunchScreen.storyboard */; };
 		E31529B01CCE7A89005D092F /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = E31529AF1CCE7A89005D092F /* Friend.m */; };
 		E31529B31CCE893E005D092F /* GitHubData.m in Sources */ = {isa = PBXBuildFile; fileRef = E31529B21CCE893E005D092F /* GitHubData.m */; };
+		E31529B61CCEC8D1005D092F /* RepoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E31529B51CCEC8D1005D092F /* RepoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		E31529AF1CCE7A89005D092F /* Friend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friend.m; sourceTree = "<group>"; };
 		E31529B11CCE893E005D092F /* GitHubData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GitHubData.h; sourceTree = "<group>"; };
 		E31529B21CCE893E005D092F /* GitHubData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitHubData.m; sourceTree = "<group>"; };
+		E31529B41CCEC8D1005D092F /* RepoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepoViewController.h; sourceTree = "<group>"; };
+		E31529B51CCEC8D1005D092F /* RepoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +78,8 @@
 				E315299B1CCE56A6005D092F /* MasterViewController.m */,
 				E315299D1CCE56A6005D092F /* DetailViewController.h */,
 				E315299E1CCE56A6005D092F /* DetailViewController.m */,
+				E31529B41CCEC8D1005D092F /* RepoViewController.h */,
+				E31529B51CCEC8D1005D092F /* RepoViewController.m */,
 				E31529A01CCE56A6005D092F /* Main.storyboard */,
 				E31529971CCE56A6005D092F /* AppDelegate.h */,
 				E31529981CCE56A6005D092F /* AppDelegate.m */,
@@ -165,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E31529B01CCE7A89005D092F /* Friend.m in Sources */,
+				E31529B61CCEC8D1005D092F /* RepoViewController.m in Sources */,
 				E31529991CCE56A6005D092F /* AppDelegate.m in Sources */,
 				E315299C1CCE56A6005D092F /* MasterViewController.m in Sources */,
 				E31529961CCE56A6005D092F /* main.m in Sources */,

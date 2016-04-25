@@ -21,8 +21,9 @@
 //
 -(void)startRequest:(NSString*) req {
     
-    
-    self.reqText = [NSString stringWithFormat:@"https://api.github.com/%@", req];
+    self.reqText = req;
+    if (![req hasPrefix:@"https://"])
+        self.reqText = [NSString stringWithFormat:@"https://api.github.com/%@", req];
     NSURL* url = [NSURL URLWithString:self.reqText];
     
     NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];

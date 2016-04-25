@@ -8,6 +8,7 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "RepoViewController.h"
 #import "Friend.h"
 #import "GitHubData.h"
 
@@ -44,7 +45,7 @@
     //
     githubData= [[GitHubData alloc] init];
     githubData.delegate = self;
-     [githubData startRequest:@"users/tomwill4804"];
+    [githubData startRequest:@"users/tomwill4804"];
 
     
 }
@@ -67,13 +68,24 @@
 //  we are going to detail view
 //
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+       
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
         controller.friend = friends[indexPath.row];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
+    if ([[segue identifier] isEqualToString:@"showRepo"]) {
+ 
+        RepoViewController *controller = (RepoViewController *)[segue destinationViewController];
+        controller.friend = friends[indexPath.row];
+        controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
+        controller.navigationItem.leftItemsSupplementBackButton = YES;
+    }
+
 }
 
 
@@ -104,11 +116,17 @@
     
     [ac addAction:okAlert];
     
+    //
+    //  cancel actions for alert
+    //
     UIAlertAction *cancelAlert = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         NSLog(@"Cancel");
     }];
     [ac addAction:cancelAlert];
     
+    //
+    //  show alert
+    //
     [self presentViewController:ac animated:YES completion:nil];
     
 }
@@ -193,11 +211,6 @@
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         
     }
-}
-
--(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    
-    
 }
 
 

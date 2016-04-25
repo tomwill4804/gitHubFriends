@@ -8,9 +8,7 @@
 
 #import "DetailViewController.h"
 
-@interface DetailViewController ()<NSURLSessionDelegate>
-    
-@property NSMutableData* receivedData;
+@interface DetailViewController ()
 
 @end
 
@@ -20,10 +18,6 @@
 
 
 - (void)viewDidLoad {
-    
- }
-
-- (void)setDetailItem:(id)newDetailItem {
     
 }
 
@@ -55,6 +49,7 @@
     NSArray *keys = [self.friend.attributes allKeys];
     NSString *key = [keys objectAtIndex:section];
     return key;
+    
 }
 
 

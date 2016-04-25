@@ -59,16 +59,16 @@
             </objects>
             <point key="canvasLocation" x="709" y="129"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Repo View Controller-->
         <scene sceneID="4Lj-Kc-aVl">
             <objects>
-                <tableViewController id="nHh-A4-JZS" sceneMemberID="viewController">
+                <tableViewController id="nHh-A4-JZS" customClass="RepoViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="uIA-ZB-Z57">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="R3Y-aA-E0Y">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="R3Y-aA-E0Y">
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R3Y-aA-E0Y" id="Wws-OX-cDW">
@@ -85,7 +85,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQp-Ik-07j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="646" y="839"/>
+            <point key="canvasLocation" x="1468" y="147"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="Nki-YV-4Qg">
@@ -129,7 +129,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="6S0-TO-JiA"/>
-                                    <segue destination="nHh-A4-JZS" kind="showDetail" trigger="accessoryAction" id="rL5-2t-ks0"/>
+                                    <segue destination="nHh-A4-JZS" kind="showDetail" identifier="showRepo" trigger="accessoryAction" id="rL5-2t-ks0"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
