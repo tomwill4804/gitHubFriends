@@ -14,6 +14,8 @@
 		E31529A21CCE56A6005D092F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E31529A01CCE56A6005D092F /* Main.storyboard */; };
 		E31529A41CCE56A6005D092F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E31529A31CCE56A6005D092F /* Assets.xcassets */; };
 		E31529A71CCE56A6005D092F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E31529A51CCE56A6005D092F /* LaunchScreen.storyboard */; };
+		E31529B01CCE7A89005D092F /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = E31529AF1CCE7A89005D092F /* Friend.m */; };
+		E31529B31CCE893E005D092F /* GitHubData.m in Sources */ = {isa = PBXBuildFile; fileRef = E31529B21CCE893E005D092F /* GitHubData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,10 @@
 		E31529A31CCE56A6005D092F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E31529A61CCE56A6005D092F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E31529A81CCE56A6005D092F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E31529AE1CCE7A89005D092F /* Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friend.h; sourceTree = "<group>"; };
+		E31529AF1CCE7A89005D092F /* Friend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friend.m; sourceTree = "<group>"; };
+		E31529B11CCE893E005D092F /* GitHubData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GitHubData.h; sourceTree = "<group>"; };
+		E31529B21CCE893E005D092F /* GitHubData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitHubData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,13 +67,17 @@
 		E31529931CCE56A6005D092F /* gitHubFriends */ = {
 			isa = PBXGroup;
 			children = (
-				E31529971CCE56A6005D092F /* AppDelegate.h */,
-				E31529981CCE56A6005D092F /* AppDelegate.m */,
+				E31529AE1CCE7A89005D092F /* Friend.h */,
+				E31529AF1CCE7A89005D092F /* Friend.m */,
+				E31529B11CCE893E005D092F /* GitHubData.h */,
+				E31529B21CCE893E005D092F /* GitHubData.m */,
 				E315299A1CCE56A6005D092F /* MasterViewController.h */,
 				E315299B1CCE56A6005D092F /* MasterViewController.m */,
 				E315299D1CCE56A6005D092F /* DetailViewController.h */,
 				E315299E1CCE56A6005D092F /* DetailViewController.m */,
 				E31529A01CCE56A6005D092F /* Main.storyboard */,
+				E31529971CCE56A6005D092F /* AppDelegate.h */,
+				E31529981CCE56A6005D092F /* AppDelegate.m */,
 				E31529A31CCE56A6005D092F /* Assets.xcassets */,
 				E31529A51CCE56A6005D092F /* LaunchScreen.storyboard */,
 				E31529A81CCE56A6005D092F /* Info.plist */,
@@ -154,9 +164,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E31529B01CCE7A89005D092F /* Friend.m in Sources */,
 				E31529991CCE56A6005D092F /* AppDelegate.m in Sources */,
 				E315299C1CCE56A6005D092F /* MasterViewController.m in Sources */,
 				E31529961CCE56A6005D092F /* main.m in Sources */,
+				E31529B31CCE893E005D092F /* GitHubData.m in Sources */,
 				E315299F1CCE56A6005D092F /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

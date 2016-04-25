@@ -8,10 +8,16 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "Friend.h"
+#import "GitHubData.h"
 
-@interface MasterViewController ()
+@interface MasterViewController() <GitHubDataDelegate> {
+    
+    GitHubData* githubData;
+    NSMutableArray* friends;
+    
+}
 
-@property NSMutableArray *objects;
 @end
 
 @implementation MasterViewController
@@ -20,51 +26,62 @@
     
     [super viewDidLoad];
     
-    if (!self.objects) {
-        self.objects = [[NSMutableArray alloc] init];
+    if (!friends) {
+        friends = [[NSMutableArray alloc] init];
     }
 
-    // Do any additional setup after loading the view, typically from a nib.
+    //
+    //  create navigation bar
+    //
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(GoToNewItemViewController:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(GetNewFriend:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
+    //
+    //  test code
+    //
+    githubData= [[GitHubData alloc] init];
+    githubData.delegate = self;
+     [githubData startRequest:@"users/tomwill4804"];
+
+    
 }
 
+
+//
+//  split view controller
+//
 - (void)viewWillAppear:(BOOL)animated {
+    
     self.clearsSelectionOnViewWillAppear = self.splitViewController.isCollapsed;
     [super viewWillAppear:animated];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)insertNewObject:(id)sender {
-    if (!self.objects) {
-        self.objects = [[NSMutableArray alloc] init];
-    }
-    [self.objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
 
 #pragma mark - Segues
 
+//
+//  we are going to detail view
+//
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = self.objects[indexPath.row];
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
-        [controller setDetailItem:object];
+        controller.friend = friends[indexPath.row];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
 }
 
--(IBAction)GoToNewItemViewController:(id)sender{
+
+
+//
+//  prompt user for new friend name
+//
+-(IBAction)GetNewFriend:(id)sender{
     
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Add a Friend"
                                                                 message:@"Enter a valid github username"
@@ -74,50 +91,106 @@
         textField.placeholder = @"username";
     }];
     
+    //
+    //  create githubData object to talk to github
+    //
     UIAlertAction *okAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        UITextField *textField = ac.textFields[0];
-        [_objects addObject:textField.text];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_objects.count-1 inSection:0];
-        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        githubData= [[GitHubData alloc] init];
+        githubData.delegate = self;
+        [githubData startRequest:ac.textFields[0].text];
+        
     }];
     
     [ac addAction:okAlert];
     
+    UIAlertAction *cancelAlert = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"Cancel");
+    }];
+    [ac addAction:cancelAlert];
+    
     [self presentViewController:ac animated:YES completion:nil];
     
+}
 
+//
+//  github request is done
+//
+-(void) gotGitHubData{
+
+    //
+    //  error returned
+    //
+    if (githubData.errorText) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"GitHub Error"
+                                                                   message:githubData.errorText
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    
+    //
+    //  create new friend
+    //
+    if (githubData.dictionary) {
+        
+        [friends addObject:[Friend friendWithDictionary:githubData.dictionary]];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:friends.count-1 inSection:0];
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+
+    }
     
 }
+
 
 #pragma mark - Table View
 
+//
+//  one section
+//
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
     return 1;
 }
 
+//
+//  one row for each friend
+//
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.objects.count;
+    
+    return friends.count;
+    
 }
 
+//
+//  return cell for table
+//
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    NSDate *object = self.objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    Friend* friend = friends[indexPath.row];
+    cell.textLabel.text = friend.userid;
+    
     return cell;
+    
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
+
     return YES;
 }
 
+
+//
+//  see what edit status is
+//
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.objects removeObjectAtIndex:indexPath.row];
+        [friends removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        
     }
 }
 
