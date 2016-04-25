@@ -59,10 +59,46 @@
         repos = githubData.dictionary;
     }
     
+    [self.tableView reloadData];
+    
 }
 
 
 #pragma mark - Table view data source
+
+//
+//  one section
+//
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 1;
+}
+
+
+//
+//  one row for each repo
+//
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return repos.count;
+    
+}
+
+
+//
+//  return cell for table
+//
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    
+    NSDictionary* dict = repos[indexPath.row];
+    
+    cell.textLabel.text = dict[@"name"];
+    
+    return cell;
+    
+}
+
 
 
 
