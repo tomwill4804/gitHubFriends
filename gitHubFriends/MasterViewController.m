@@ -41,14 +41,13 @@
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(GetNewFriend:)];
     self.navigationItem.rightBarButtonItem = addButton;
-    self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    self.repoViewController = (RepoViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
     //
     //  test code
     //
     githubData= [[GitHubData alloc] init];
     [githubData startRequest:@"users/tomwill1701" delegate:self];
-
     
 }
 
@@ -71,10 +70,9 @@
 //
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
        
-        DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
+        DetailViewController *controller = (DetailViewController *)[segue destinationViewController];
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         controller.friend = friends[indexPath.row];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
@@ -86,7 +84,8 @@
     //
     if ([[segue identifier] isEqualToString:@"showRepo"]) {
  
-        RepoViewController *controller = (RepoViewController *)[segue destinationViewController];
+        RepoViewController *controller = (RepoViewController *)[[segue destinationViewController] topViewController];
+        //controller = self.repoViewController;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         controller.friend = friends[indexPath.row];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;

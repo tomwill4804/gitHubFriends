@@ -21,6 +21,12 @@
 
 @implementation RepoViewController
 
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+    
+}
+
 //
 //  get the list of repos from github
 //
@@ -71,11 +77,11 @@
 //
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         
-        DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
+        DetailViewController *controller = (DetailViewController *)[segue destinationViewController];
         Friend *friend = [Friend friendWithDictionary:repos[indexPath.row]];
         controller.friend = friend;
         NSDictionary* dict = repos[indexPath.row];
