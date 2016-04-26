@@ -24,20 +24,23 @@
 //
 //  get the list of repos from github
 //
-- (void)viewDidLoad {
+- (void)setFriend:(id)newFriend {
     
-    [super viewDidLoad];
+    if (_friend != newFriend) {
+        _friend = newFriend;
+        
+        self.title = self.friend.name;
+        
+        repos = [[NSArray alloc] init];
+        
+        //
+        //  get data from github
+        //
+        githubData= [[GitHubData alloc] init];
+        [githubData startRequest:self.friend.attributes[@"repos_url"] delegate:self];
+        
+    }
     
-    self.title = self.friend.name;
-    
-    repos = [[NSArray alloc] init];
-    
-    //
-    //  get data from github
-    //
-    githubData= [[GitHubData alloc] init];
-    [githubData startRequest:self.friend.attributes[@"repos_url"] delegate:self];
-
 }
 
 //
