@@ -47,7 +47,7 @@
     //  test code
     //
     githubData= [[GitHubData alloc] init];
-    [githubData startRequest:@"users/tomwill4804" delegate:self];
+    [githubData startRequest:@"users/tomwill1701" delegate:self];
 
     
 }

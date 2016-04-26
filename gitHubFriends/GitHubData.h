@@ -23,7 +23,7 @@
 @property (copy, nonatomic)   NSString* reqText;
 @property (strong, nonatomic) NSMutableData* rawData;
 @property (strong, nonatomic) NSDictionary *dictionary;
-@property (strong, nonatomic) NSString *errorText;
+@property (copy, nonatomic) NSString *errorText;
 
 -(void)startRequest:(NSString*)req delegate:(id<GitHubDataDelegate>) delegate;
 

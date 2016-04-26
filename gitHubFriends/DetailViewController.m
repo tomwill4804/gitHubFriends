@@ -64,14 +64,19 @@
     NSArray *values = [self.friend.attributes allValues];
     NSString *value = [values objectAtIndex:indexPath.section];
 
+    //
+    //  format cell text based on type of data in dictionary
+    //
     if ([value isKindOfClass:[NSString class]]) {
     }
         
     else if([value isKindOfClass:[NSNumber class]]) {
-        value = [NSString stringWithFormat:@"%@", (NSNumber*)value];
-    }
-    else if (value == (void*)kCFBooleanFalse || value == (void*)kCFBooleanTrue) {
-        value = [NSString stringWithFormat:@"&d", (bool)value];
+        
+        if (value == (void*)kCFBooleanFalse || value == (void*)kCFBooleanTrue) {
+            value = [NSString stringWithFormat:@"%@", value ? @"Yes" : @"No"];
+        }
+        else
+            value = [NSString stringWithFormat:@"%@", (NSNumber*)value];
     }
     else
         value = @" ";

@@ -56,7 +56,7 @@
     //  save array of dictionaries address
     //
     if (githubData.dictionary) {
-        repos = githubData.dictionary;
+        repos = (NSArray*)githubData.dictionary;
     }
     
     [self.tableView reloadData];
