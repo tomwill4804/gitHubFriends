@@ -71,12 +71,11 @@
 //
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    NSLog(@"%@", [segue identifier]);
     
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
        
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         controller.friend = friends[indexPath.row];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
@@ -88,6 +87,7 @@
     if ([[segue identifier] isEqualToString:@"showRepo"]) {
  
         RepoViewController *controller = (RepoViewController *)[segue destinationViewController];
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         controller.friend = friends[indexPath.row];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
@@ -143,7 +143,6 @@
     //  cancel actions for alert
     //
     UIAlertAction *cancelAlert = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        NSLog(@"Cancel");
     }];
     [ac addAction:cancelAlert];
     
@@ -166,7 +165,6 @@
     //  cancel actions for alert
     //
     UIAlertAction *cancelAlert = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        NSLog(@"Cancel");
     }];
     [ac addAction:cancelAlert];
     

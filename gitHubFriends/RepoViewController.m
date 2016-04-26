@@ -69,7 +69,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    NSLog(@"%@", [segue identifier]);
     
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         
