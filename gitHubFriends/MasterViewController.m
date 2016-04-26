@@ -16,6 +16,7 @@
     
     GitHubData* githubData;
     NSMutableArray* friends;
+    NSString* oldName;
     
 }
 
@@ -27,6 +28,7 @@
     
     [super viewDidLoad];
     self.title = @"GitHub Friends";
+    oldName = @"";
     
     if (!friends) {
         friends = [[NSMutableArray alloc] init];
@@ -106,6 +108,7 @@
     
     [ac addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"username";
+        textField.text = oldName;
     }];
     
     //
@@ -113,13 +116,52 @@
     //
     UIAlertAction *okAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        githubData= [[GitHubData alloc] init];
-        [githubData startRequest:ac.textFields[0].text delegate:self];
+        NSString *name = ac.textFields[0].text;
+        oldName = name;
+        
+        //
+        //  check for duplicate name
+        //
+        BOOL dup = NO;
+        for(Friend* friend in friends) {
+            if ([friend.name isEqualToString:name])
+                dup = YES;
+        }
+        if (dup)
+            [self error:@"Duplicate name"];
+        else {
+            name = [NSString stringWithFormat:@"users/%@", name];
+            githubData= [[GitHubData alloc] init];
+            [githubData startRequest:name delegate:self];
+        }
         
     }];
     
     [ac addAction:okAlert];
     
+    //
+    //  cancel actions for alert
+    //
+    UIAlertAction *cancelAlert = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"Cancel");
+    }];
+    [ac addAction:cancelAlert];
+    
+    //
+    //  show alert
+    //
+    [self presentViewController:ac animated:YES completion:nil];
+    
+}
+
+//
+//  display an error
+//
+-(void)error:(NSString*) text {
+    
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                message:text
+                                                         preferredStyle:UIAlertControllerStyleAlert];
     //
     //  cancel actions for alert
     //
@@ -144,11 +186,7 @@
     //  error returned
     //
     if (githubData.errorText) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"GitHub Error"
-                                                                   message:githubData.errorText
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-        
-        [self presentViewController:alert animated:YES completion:nil];
+        [self error:githubData.errorText];
     }
     
     //
