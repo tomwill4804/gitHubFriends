@@ -70,7 +70,7 @@
     else if([value isKindOfClass:[NSNumber class]]) {
         value = [NSString stringWithFormat:@"%@", (NSNumber*)value];
     }
-    else if([value isKindOfClass:[NSNumber class]]) {
+    else if (value == (void*)kCFBooleanFalse || value == (void*)kCFBooleanTrue) {
         value = [NSString stringWithFormat:@"&d", (bool)value];
     }
     else

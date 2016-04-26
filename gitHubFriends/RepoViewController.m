@@ -50,11 +50,6 @@
     //  error returned
     //
     if (githubData.errorText) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"GitHub Error"
-                                                                       message:githubData.errorText
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        
-        [self presentViewController:alert animated:YES completion:nil];
     }
     
     //
