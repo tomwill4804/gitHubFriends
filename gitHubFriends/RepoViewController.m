@@ -8,6 +8,7 @@
 
 #import "RepoViewController.h"
 #import "GitHubData.h"
+#import "DetailViewController.h"
 
 @interface RepoViewController() <GitHubDataDelegate> {
     
@@ -27,7 +28,7 @@
     
     [super viewDidLoad];
     
-    self.title = self.friend.userid;
+    self.title = self.friend.name;
     
     repos = [[NSArray alloc] init];
     
@@ -64,6 +65,26 @@
     }
     
     [self.tableView reloadData];
+    
+}
+
+//
+//  we are going to detail view (dictionary for repo)
+//
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    NSLog(@"%@", [segue identifier]);
+    
+    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+        
+        DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
+        Friend *friend = [Friend friendWithDictionary:repos[indexPath.row]];
+        controller.friend = friend;
+        NSDictionary* dict = repos[indexPath.row];
+        friend.name = dict[@"name"];
+        
+    }
     
 }
 

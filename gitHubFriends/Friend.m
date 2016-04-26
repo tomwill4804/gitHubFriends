@@ -19,7 +19,7 @@
     if (friendDict) {
         friend = [[Friend alloc] init];
         
-        friend.userid = friendDict[@"login"];
+        friend.name = friendDict[@"login"];
         friend.attributes = friendDict;
     }
     

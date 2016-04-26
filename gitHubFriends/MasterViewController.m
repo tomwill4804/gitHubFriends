@@ -65,11 +65,12 @@
 #pragma mark - Segues
 
 //
-//  we are going to detail view
+//  we are going to detail view (dictionary for friend)
 //
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    NSLog(@"%@", [segue identifier]);
     
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
        
@@ -78,6 +79,10 @@
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
+    
+    //
+    //  show repo list view controller
+    //
     if ([[segue identifier] isEqualToString:@"showRepo"]) {
  
         RepoViewController *controller = (RepoViewController *)[segue destinationViewController];
@@ -187,7 +192,7 @@
 
     Friend* friend = friends[indexPath.row];
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-    cell.textLabel.text = friend.userid;
+    cell.textLabel.text = friend.name;
     
     return cell;
     

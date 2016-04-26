@@ -10,7 +10,7 @@
 
 @interface Friend : NSObject
 
-@property (copy, nonatomic) NSString *userid;
+@property (copy, nonatomic) NSString *name;
 @property (weak, nonatomic) NSDictionary *attributes;
 @property (copy, nonatomic) NSArray  *repros;
 
